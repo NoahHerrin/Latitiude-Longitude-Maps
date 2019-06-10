@@ -1,58 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <style>
-      /* Always set the map height explicitly to define the size of the div
+
+<head>
+  <title>Simple Map</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <style>
+    /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 50%;
-        width: 50%
+        height: 85%;
+        position: abosolute;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
-        width: 100%
         margin: 0;
         padding: 0;
       }
-
+      #searchbar {
+        text-align: center;
+      }
+      h1 {
+        text-align: center;
+      }
     </style>
-  </head>
-  <body>
-    <form name ="LatLongSearch" class="" onsubmit= "return loadmap()" method="post" method="post">
-      Latitude: <input type="text" name="Latitude" value="">
-    <select name="lat_direction">
+</head>
+
+<body>
+  <h1>Latitude Longitude Coordinate Search</h1>
+  <!-- Search Bar -->
+
+  <div id="map"></div>
+  <section id="searchbar">
+  Latitude: <input type="text" id="Latitude" value="">
+
+  <select id="lat_direction">
     <option value="North">North</option>
     <option value="South">South</option>
   </select>
-      Longitude: <input type="text" name="Longitude" value="">
-      <select name="long_direction">
-      <option value="East">East</option>
-      <option value="West">West</option>
-    </select>
-      <button type="button" name="Go" id="searchbutton">Go</button>
-    </form>
-    <div id="map"></div>
-<script type="text/javascript">
-  function initMap() {
-    var myLatLng = {lat: 6.4, lng: 14.5}
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: myLatLng,
-      zoom: 3
-    });
-    var marker = new google.maps.Marker({
-      position: myLatLng,
-      map: map,
-      title: 'Hello World!'
-    });
-  }
 
-</script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClVSmi7rXhB2NsmSJtGxsF9J-N2s6BZd0&callback=initMap"
-    async defer></script>
-<script src="js/loadmap.js" /script>
-  </body>
-</html>
+  Longitude: <input type="text" id="Longitude" value="">
+
+  <select id="long_direction">
+    <option value="East">East</option>
+    <option value="West">West</option>
+  </select>
+
+  <button id="search">Go</button>
+  </section>
+  <script type="text/javascript">
+    var map;
+    var numMarkers = 1;
+    function placeMarker(lat, long) {
+      var marker = new google.maps.Marker({
+        position: {lat: lat, lng: long},
+        map: map,
+        title: 'Location' + numMarkers
+      });
+      numMarkers +=1
+    }
+    function initMap() {
+      var myLatLng = {
+        lat: 0,
+        lng: 0
+      }
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: myLatLng,
+        zoom: 3
+      });
+    //placeMarker(0,0);
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClVSmi7rXhB2NsmSJtGxsF9J-N2s6BZd0&callback=initMap" async defer></script>
+
+    <script src="js/loadmap.js"></script>
+    </body>
+ </html>
