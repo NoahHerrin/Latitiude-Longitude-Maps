@@ -27,8 +27,8 @@ function search() {
     console.log(invalidParams)
     return;
   }
-  lat = parseInt(lat)
-  long = parseInt(long)
+  lat = parseFloat(lat)
+  long = parseFloat(long)
   if (lat_dir == "South") {
     lat *= -1;
   }
